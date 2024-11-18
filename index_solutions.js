@@ -16,7 +16,7 @@ const myLogger = function (req, res, next) {
   next()
 }
 
-app.use(myLogger)
+app.use(myLogger);
 
 // Question 1: Add a "Priority" Field to the To-Do API
 // Sample data
@@ -33,11 +33,11 @@ after completing this part, you need to comment out the GET end point
 already implemented here to test this new GET endpoint! 
 */
 app.get('/todos', (req, res) => {
-  let { completed } = req.query
+  const { completed } = req.query;
   if (completed === 'true' || completed === 'false') {
     // convert the query parameter to a boolean then Array.filter based on that
-    let isCompleted = completed === 'true';
-    let filteredData = todos.filter(item => item.completed === isCompleted);
+    const isCompleted = completed === 'true';
+    const filteredData = todos.filter(item => item.completed === isCompleted);
     res.json(filteredData);
   } else {
     res.json(todos);
