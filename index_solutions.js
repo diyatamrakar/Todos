@@ -18,12 +18,12 @@ const myLogger = function (req, res, next) {
 
 app.use(myLogger)
 
-
 // Question 1: Add a "Priority" Field to the To-Do API
 // Sample data
 let todos = [
-  { id: 1, task: "Learn Node.js", completed: false, priority: "medium" },
-  { id: 2, task: "Build a REST API", completed: false, priority: "medium" }
+  { id: 1, task: 'Read', completed: false, priority: 'low' },  
+  { id: 2, task: 'Learn Node.js', completed: false, priority: 'medium' },  
+  { id: 3, task: 'Finish assignments', completed: false, priority: 'high' }  
 ];
 
 /* 
@@ -37,7 +37,7 @@ app.get('/todos', (req, res) => {
   if (completed === 'true' || completed === 'false') {
     // convert the query parameter to a boolean then Array.filter based on that
     let isCompleted = completed === 'true';
-    let filteredData = todos.filter(item => item.completed === isCompleted)
+    let filteredData = todos.filter(item => item.completed === isCompleted);
     res.json(filteredData);
   } else {
     res.json(todos);
@@ -57,15 +57,13 @@ app.post('/todos', (req, res) => {
   res.status(201).json(newTodo);
 });
 
-
-
 // PUT /todos/:id - Update an existing to-do item
 app.put('/todos/:id', (req, res, next) => {
   if (req.url.includes("complete-all"))
     next()
   else {
     const id = parseInt(req.params.id);
-    const todo = todos.find(t => t.id === id);
+    const todo = todos.find((t) => t.id === id);
     if (!todo) {
       return res.status(404).send("To-Do item not found");
     }
@@ -88,19 +86,19 @@ app.put('/todos/complete-all', (req, res) => {
     item.completed = true
   })
   // You must return a 200 or 204 status code to the client indicating success of this operation
-  res.status(200).send();
+  res.status(200).send('To-Do item all completed successfully');
 });
 
 
 // DELETE /todos/:id - Delete a to-do item
 app.delete('/todos/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const index = todos.findIndex(t => t.id === id);
+  const index = todos.findIndex((t) => t.id === id);
   if (index === -1) {
     return res.status(404).send("To-Do item not found");
   }
   todos.splice(index, 1);
-  res.status(204).send();
+  res.status(204).send('To-Do item deleted successfully');
 });
 
 // Start the server
