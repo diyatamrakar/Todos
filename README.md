@@ -1,2 +1,3 @@
 # Todos API 
- The To-Do API is a service for managing tasks, supporting the CURD 
+ The To-Do API is a service for managing tasks, supporting the CURD ( Create, Update, Read, Delete) operations. 
+The main parts of the API include the following: GET /todos to accomplish the tasks and also takes the further options such as filtering in or out the completed tasks listing by appending ?completed=true|false after the GET route method, POST /tasks for creating tasks, put to /tasks to revise a task, put to update all tasks with completed as true, and delete is /tasks to drop all tasks. The tasks will contain attributes such as descriptions, completeness as flag and prioritization (normal) being the flag on emphasis. The API also provides data and can be augmented with validation, storage and sorting.
