@@ -54,7 +54,7 @@ app.post('/todos', (req, res) => {
     priority: req.body.priority || "medium"
   };
   todos.push(newTodo);
-  res.status(201).json(newTodo);
+  res.status(201).json(newTodo); // Respond with the created to-do item and status 201
 });
 
 // PUT /todos/:id - Update an existing to-do item
@@ -67,7 +67,7 @@ app.put('/todos/:id', (req, res, next) => {
     if (!todo) {
       return res.status(404).send("To-Do item not found");
     }
-    todo.task = req.body.task || todo.task;
+    todo.task = req.body.task || todo.task; // Update the task and/or completed status if provided
     todo.completed = req.body.completed !== undefined ? req.body.completed : todo.completed;
     res.json(todo);
   }
@@ -85,7 +85,7 @@ app.put('/todos/complete-all', (req, res) => {
   todos.forEach(item => {
     item.completed = true
   })
-  // You must return a 200 or 204 status code to the client indicating success of this operation
+  //returns a 200 status code to the client indicating success of this operation
   res.status(200).send('To-Do item all completed successfully');
 });
 
@@ -97,7 +97,7 @@ app.delete('/todos/:id', (req, res) => {
   if (index === -1) {
     return res.status(404).send("To-Do item not found");
   }
-  todos.splice(index, 1);
+  todos.splice(index, 1); // Remove the to-do item from the array
   res.status(204).send('To-Do item deleted successfully');
 });
 
