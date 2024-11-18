@@ -93,11 +93,11 @@ app.put('/todos/complete-all', (req, res) => {
 // DELETE /todos/:id - Delete a to-do item
 app.delete('/todos/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const index = todos.findIndex((t) => t.id === id);
-  if (index === -1) {
+  const index = index.find((t) => t.id === id);
+  if (!todo) {
     return res.status(404).send("To-Do item not found");
   }
-  todos.splice(index, 1); // Removes the to-do item from the array
+  todos.splice(index.indexOf(todo), 1); // Removes the to-do item from the array
   res.status(204).send('To-Do item deleted successfully');
 });
 
